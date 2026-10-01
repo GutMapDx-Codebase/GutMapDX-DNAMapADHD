@@ -57,7 +57,6 @@ const TitlePage = () => {
     const container = document.getElementById("report-container");
     if (!container) return;
 
-    // Signal to Puppeteer that the report DOM is ready for PDF capture.
     window.__REPORT_READY__ = false;
     requestAnimationFrame(() => {
       window.__REPORT_READY__ = true;

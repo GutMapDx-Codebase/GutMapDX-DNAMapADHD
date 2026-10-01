@@ -19,11 +19,6 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* 
-     We set the default font here. 
-     Note: I removed the "!important" from "body *" so that 
-     Tailwind classes like "font-poppins" actually work on the report.
-  */
   html, body, #root {
     font-family: 'Poppins';
     margin: 0;
@@ -32,7 +27,6 @@
     /* min-height: 100vh; */
   }
 
-  /* Keep your previous body layout if you want everything centered globally */
   body {
     display: flex;
     place-items: center;
