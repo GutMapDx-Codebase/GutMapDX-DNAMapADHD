@@ -40,7 +40,7 @@ const Page3 = () => {
             </div>
 
             {pageIndex === 0 && (
-              <div className="absolute left-0 right-0 top-[125px] z-10 flex justify-center">
+              <div className="absolute left-0 right-0 top-[115px] z-10 flex justify-center">
                 <div
                   className="px-8 py-1 text-[17px] rounded-full"
                   style={{ backgroundColor: primaryColor, color: "#ffffff" }}
@@ -50,17 +50,17 @@ const Page3 = () => {
               </div>
             )}
             <header
-              className={`mt-0 absolute left-1/2 -translate-x-1/2 ${pageIndex === 0 ? "top-[170px]" : "top-[116px]"} z-10 flex h-[56px] items-center px-[40px] rounded-full w-fit whitespace-nowrap`}
+              className={`mt-0 absolute left-1/2 -translate-x-1/2 ${pageIndex === 0 ? "top-[160px]" : "top-[116px]"} z-10 flex h-[45px] items-center px-[40px] rounded-full w-fit whitespace-nowrap`}
               style={{
                 background: headerBg,
               }}
             >
-              <h1 className="text-[23px] font-bold leading-tight" style={{ color: primaryColor }}>
+              <h1 className="text-[16px] font-bold leading-tight" style={{ color: primaryColor }}>
                 {section?.name ?? "Untitled section"}
               </h1>
             </header>
 
-            <div className={`flex flex-col gap-5 ${pageIndex === 0 ? "mt-[56px]" : "mt-2"}`}>
+            <div className={`flex flex-col gap-5 ${pageIndex === 0 ? "mt-[40px]" : "mt-2"}`}>
               {genes.map((gene, geneIndex) => (
                 <GeneResultCard key={`${gene?.Gene ?? "gene"}-${geneIndex}`} gene={gene} result={result.slice(-1)} accentColor={primaryColor} />
               ))}

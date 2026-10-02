@@ -2,8 +2,6 @@ import { useContext, useEffect } from "react";
 import { getGeneOutcome } from "../utils/geneticResults";
 import { GlobalDataContext } from "../context/GlobalDataContext";
 
-// background / text are the original colours. tint (light fill) and edge (outline)
-// are used for the recommendation panel and the Result tile border.
 const STATUS_STYLES = {
   green: { background: "#a8e8c7", text: "#075b3c", tint: "#edfaf3", edge: "#8fd3b1" },
   amber: { background: "#f0eb91", text: "#6b5f00", tint: "#fcfadf", edge: "#d9d170" },
@@ -20,7 +18,6 @@ const getSnps = (gene) => {
 
 const LINE = "#e3dcef";
 
-// Small tile with a label on top (Gene / Key SNP / Result)
 const Tile = ({ label, labelColor, className = "", style, children }) => (
   <div
     className={`flex min-h-[60px] flex-col justify-center rounded-[14px] border bg-white px-[14px] py-2 ${className}`}
@@ -36,7 +33,6 @@ const Tile = ({ label, labelColor, className = "", style, children }) => (
   </div>
 );
 
-// White panel with a bold heading and a thin line under it
 const Panel = ({ title, headingColor = "#2b1f4a", borderColor = LINE, style, children }) => (
   <section
     className="rounded-[14px] border bg-white px-[15px] pb-3 pt-[10px]"
@@ -124,10 +120,10 @@ const GeneResultCard = ({ gene, result, accentColor = "#006e5e" }) => {
       {/* Relevance | What this means */}
       <div className="grid grid-cols-2 gap-[9px]">
         <Panel title="Relevance">
-          <p className="text-[11px] leading-[1.5]">{relevance}</p>
+          <p className="text-[10px] leading-[1.5]">{relevance}</p>
         </Panel>
         <Panel title="What this means">
-          <p className="text-[11px] leading-[1.5] text-[#4a5470]">{explanation}</p>
+          <p className="text-[10px] leading-[1.5] text-[#4a5470]">{explanation}</p>
         </Panel>
       </div>
 
@@ -138,7 +134,7 @@ const GeneResultCard = ({ gene, result, accentColor = "#006e5e" }) => {
         borderColor={statusStyle.edge}
         style={{ backgroundColor: statusStyle.tint }}
       >
-        <div className="space-y-1 text-[11px] leading-[1.5]">
+        <div className="space-y-1 text-[10px] leading-[1.5]">
           {recommendations.map((recommendation, index) => (
             <p key={`${recommendation}-${index}`}>{recommendation}</p>
           ))}
