@@ -1,8 +1,9 @@
-const STATUS_ORDER = ["red", "amber", "green"];
+const STATUS_ORDER = ["red", "amber", "green","blue"];
 
 const getRsIds = (value) => String(value ?? "").toLowerCase().match(/rs\d+/g) ?? [];
 
 const getValueByPattern = (object, pattern) => {
+  console.log(object, pattern)
   const key = Object.keys(object ?? {}).find((property) => pattern.test(property));
   return key ? object[key] : "";
 };
@@ -30,6 +31,13 @@ export const getGeneticResultIndex = (result) => {
 };
 
 const getRuleForGenotype = (snp, genotype) => {
+  // console.log("SNP: ", snp, "Genotype: ", genotype)
+
+  // if (snp?.isBlue !== undefined && snp.isBlue === true) {
+  //   console.log("SNP is blue: ", snp.isBlue);
+  //   return { status: "blue", rule: snp?.isBlue };
+  // }
+
   const ruleSets = [
     { status: "red", rule: snp?.isRed },
     { status: "amber", rule: snp?.isAmber },
@@ -52,8 +60,10 @@ export const getSnpOutcome = (snp, geneticResultIndex) => {
   // console.log(snp?.["Key SNPs"], rsId);
   // console.log("RS ID", rsId);
   const rawResult = rsId ? geneticResultIndex.get(rsId) : undefined;
+
   const genotype = rawResult?.genotype ?? "";
   const matchedRule = genotype ? getRuleForGenotype(snp, genotype) : undefined;
+  console.log("Matched Rule: ", matchedRule)
   const displayResult = matchedRule
     ? getValueByPattern(matchedRule.rule, /display result/i) || genotype
     : genotype;
@@ -61,10 +71,10 @@ export const getSnpOutcome = (snp, geneticResultIndex) => {
     key: rsId ?? snp?.["Key SNPs"] ?? "unknown-snp",
     label: snp?.["Key SNPs"] ?? "—",
     genotype: displayResult || "—",
-    status: matchedRule?.status ?? "unavailable",
+    status: snp.isBlue ? "blue" : matchedRule?.status ?? "unavailable",
     recommendation: matchedRule
       ? getValueByPattern(matchedRule.rule, /recommendation/i)
-      : "No matching result or recommendation is available for this SNP.",
+      : getValueByPattern(snp?.isGreen, /recommendation/i),
   };
 };
 

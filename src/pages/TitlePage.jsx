@@ -151,7 +151,7 @@ const TitlePage = () => {
             </h1>
 
             <div>
-              <h2 className="text-[22px] font-bold w-fit py-0 px-5 rounded-full" style={{ backgroundColor: primaryColor, color: "#ffffff" }}>
+              <h2 className={`text-[${Kittype?.length > 25 ? "18px" : "22px"}] font-bold w-fit py-0 px-5 rounded-full`} style={{ backgroundColor: primaryColor, color: "#ffffff" }}>
                 {Kittype ? Kittype : ""}
               </h2>
             </div>

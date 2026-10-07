@@ -6,6 +6,7 @@ const STATUS_STYLES = {
   green: { background: "#a8e8c7", text: "#075b3c", tint: "#edfaf3", edge: "#8fd3b1" },
   amber: { background: "#f0eb91", text: "#6b5f00", tint: "#fcfadf", edge: "#d9d170" },
   red: { background: "#e9a0ad", text: "#850016", tint: "#fceef0", edge: "#d98593" },
+  blue: { background: "#A6C8EB", text: "#15558A", tint: "#EEF6FD", edge: "#8DB5D9" },
   unavailable: { background: "#e7e4e9", text: "#5f5865", tint: "#f5f4f7", edge: "#cfcbd6" },
 };
 
@@ -53,7 +54,9 @@ const GeneResultCard = ({ gene, result, accentColor = "#006e5e" }) => {
 
   const snps = getSnps(gene);
   const { outcomes, status, recommendations } = getGeneOutcome(snps, result, gene?.scoring);
+  console.log(status)
   const statusStyle = getStatusStyle(status);
+  console.log(statusStyle)
   const relevance = gene?.["Function / ADHD Relevance"] ?? gene?.Function ?? "—";
   const explanation =
     gene?.["Generic Explanation (Lay-readable, ADHD-specific)"] ??
@@ -118,13 +121,17 @@ const GeneResultCard = ({ gene, result, accentColor = "#006e5e" }) => {
       </div>
 
       {/* Relevance | What this means */}
-      <div className="grid grid-cols-2 gap-[9px]">
+      <div className={`grid gap-[9px] ${explanation ? "grid-cols-2" : "grid-cols-1"}`}>
         <Panel title="Relevance">
           <p className="text-[10px] leading-[1.5]">{relevance}</p>
         </Panel>
-        <Panel title="What this means">
-          <p className="text-[10px] leading-[1.5] text-[#4a5470]">{explanation}</p>
-        </Panel>
+        {
+          explanation && (
+            <Panel title="What this means">
+              <p className="text-[10px] leading-[1.5] text-[#4a5470]">{explanation}</p>
+            </Panel>
+          )
+        }
       </div>
 
       {/* Recommendation, tinted with the gene status */}

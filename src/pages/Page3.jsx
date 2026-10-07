@@ -20,7 +20,8 @@ const Page3 = () => {
   let reportPageNumber = 3;
 
   return sections.map((section, sectionIndex) => {
-    const pages = chunkItems(section.collection);
+    const itemsPerPage = Kittype === "DNAMap Sports, Exercise & Nutrition" ? 3 : 2;
+    const pages = chunkItems(section.collection, itemsPerPage);
     const sectionPages = pages.length > 0 ? pages : [[]];
 
     return sectionPages.map((genes, pageIndex) => {

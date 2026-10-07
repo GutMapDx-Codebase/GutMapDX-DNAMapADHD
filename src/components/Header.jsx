@@ -17,7 +17,7 @@ const Header = ({ section = "", title = "DNAMap - ADHD", logo, color = "#6e4e9f"
       </div>
 
       <div className="flex flex-col items-end">
-        <div className="text-[34px] font-bold leading-none" style={{ color }}>
+        <div className={`text-[${title?.length > 25 ? "18px" : "22px"}] font-bold leading-none`} style={{ color }}>
           {title}
         </div>
 
