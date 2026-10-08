@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import GeneResultCard from "../components/GeneResultCard";
 import { GlobalDataContext } from "../context/GlobalDataContext";
 import { chunkItems, getSections } from "../utils/reportPages";
@@ -6,21 +6,31 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Page3 = () => {
-  const { style, dnaCategories, kitid, result, Kittype } = useContext(GlobalDataContext);
-    console.log("Page3 - style:", style);
+  const { style, dnaCategories, kitid, result, Kittype, setTotalPages } = useContext(GlobalDataContext);
 
   const sections = getSections(dnaCategories);
   const primaryColor = style?.primaryColor ?? "#006e5e";
   const secondaryColor = style?.secondaryColor ?? "#006e5e";
   const headerBg = style?.secondaryColor ? `${style.primaryColor}1A` : "rgba(0,110,94,0.15)";
-  const totalPages = 2 + sections.reduce(
-    (total, section) => total + Math.max(1, Math.ceil(section.collection.length / 2)),
+
+  const itemsPerPage = Kittype === "DNAMap Sports, Exercise & Nutrition" ? 3 : 2;
+
+  const totalPagesCount =Kittype === "DNAMap Sports, Exercise & Nutrition" ? 3 + sections.reduce(
+    (total, section) => total + Math.max(1, Math.ceil(section.collection.length / itemsPerPage)),
+    0,
+  ) : 2 + sections.reduce(
+    (total, section) => total + Math.max(1, Math.ceil(section.collection.length / itemsPerPage)),
     0,
   );
+
+  useEffect(()=>{
+    setTotalPages(totalPagesCount)
+  },[totalPagesCount])
+
   let reportPageNumber = 3;
 
   return sections.map((section, sectionIndex) => {
-    const itemsPerPage = Kittype === "DNAMap Sports, Exercise & Nutrition" ? 3 : 2;
+
     const pages = chunkItems(section.collection, itemsPerPage);
     const sectionPages = pages.length > 0 ? pages : [[]];
 
@@ -68,7 +78,7 @@ const Page3 = () => {
             </div>
 
             <div className="absolute inset-x-0 bottom-0 z-20">
-              <Footer sampleId={kitid} page={page} totalPages={totalPages} color={secondaryColor} bg={headerBg} />
+              <Footer sampleId={kitid} page={page} totalPages={totalPagesCount} color={secondaryColor} bg={headerBg} />
             </div>
           </div>
         </section>

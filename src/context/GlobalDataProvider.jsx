@@ -8,6 +8,8 @@ export const GlobalDataProvider = ({ children }) => {
   const [globalData, setGlobalData] = useState(null);
   const [geneColors, setGeneColors] = useState([]);
 
+  const [totalPages, setTotalPages] = useState(0);
+
   const registerGeneColor = useCallback((gene, recommendationColor) => {
     setGeneColors((prev) => {
       const exists = prev.some((entry) => entry.gene === gene);
@@ -92,7 +94,7 @@ export const GlobalDataProvider = ({ children }) => {
   }, [id]);
 
   return (
-    <GlobalDataContext.Provider value={{ ...globalData, geneColors, registerGeneColor }}>
+    <GlobalDataContext.Provider value={{ ...globalData, geneColors, registerGeneColor, totalPages, setTotalPages }}>
       {children}
     </GlobalDataContext.Provider>
   );
