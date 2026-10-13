@@ -3,7 +3,6 @@ const STATUS_ORDER = ["red", "amber", "green","blue"];
 const getRsIds = (value) => String(value ?? "").toLowerCase().match(/rs\d+/g) ?? [];
 
 const getValueByPattern = (object, pattern) => {
-  console.log(object, pattern)
   const key = Object.keys(object ?? {}).find((property) => pattern.test(property));
   return key ? object[key] : "";
 };
@@ -31,10 +30,8 @@ export const getGeneticResultIndex = (result) => {
 };
 
 const getRuleForGenotype = (snp, genotype) => {
-  // console.log("SNP: ", snp, "Genotype: ", genotype)
 
   // if (snp?.isBlue !== undefined && snp.isBlue === true) {
-  //   console.log("SNP is blue: ", snp.isBlue);
   //   return { status: "blue", rule: snp?.isBlue };
   // }
 
@@ -57,13 +54,10 @@ const getRuleForGenotype = (snp, genotype) => {
 
 export const getSnpOutcome = (snp, geneticResultIndex) => {
   const rsId = getRsIds(snp?.["Key SNPs"])[0];
-  // console.log(snp?.["Key SNPs"], rsId);
-  // console.log("RS ID", rsId);
   const rawResult = rsId ? geneticResultIndex.get(rsId) : undefined;
 
   const genotype = rawResult?.genotype ?? "";
   const matchedRule = genotype ? getRuleForGenotype(snp, genotype) : undefined;
-  console.log("Matched Rule: ", matchedRule)
   const displayResult = matchedRule
     ? getValueByPattern(matchedRule.rule, /display result/i) || genotype
     : genotype;

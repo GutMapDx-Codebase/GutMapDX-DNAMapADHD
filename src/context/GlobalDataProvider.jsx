@@ -5,6 +5,7 @@ import axios from "axios";
 
 export const GlobalDataProvider = ({ children }) => {
   const { id } = useParams();
+  const { kittype } = useParams();
   const [globalData, setGlobalData] = useState(null);
   const [geneColors, setGeneColors] = useState([]);
 
@@ -64,8 +65,22 @@ export const GlobalDataProvider = ({ children }) => {
 
         const styleResponse = await axios.request(styleConfig);
 
+        let selectedKitType = data?.Kittype;
+
+        if (kittype) {
+          const matchedKitType = data?.multipleKitTypes?.find(
+            (item) =>
+              item.toLowerCase().replace(/\s+/g, "") ===
+              kittype.toLowerCase().replace(/\s+/g, "")
+          );
+
+          if (matchedKitType) {
+            selectedKitType = matchedKitType;
+          }
+        }
+
         let dnaCategoryData = JSON.stringify({
-          reportName: data?.Kittype,
+          reportName: selectedKitType,
         });
 
         const dnaCategoryResponse = await axios.request({

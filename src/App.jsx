@@ -9,6 +9,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
+            path="/:id/:kittype"
+            element={
+              <GlobalDataProvider>
+                <Report />
+              </GlobalDataProvider>
+            }
+          />
+          <Route
             path="/:id"
             element={
               <GlobalDataProvider>

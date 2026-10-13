@@ -54,9 +54,7 @@ const GeneResultCard = ({ gene, result, accentColor = "#006e5e" }) => {
 
   const snps = getSnps(gene);
   const { outcomes, status, recommendations } = getGeneOutcome(snps, result, gene?.scoring);
-  console.log(status)
   const statusStyle = getStatusStyle(status);
-  console.log(statusStyle)
   const relevance = gene?.["Function / ADHD Relevance"] ?? gene?.Function ?? "—";
   const explanation =
     gene?.["Generic Explanation (Lay-readable, ADHD-specific)"] ??
