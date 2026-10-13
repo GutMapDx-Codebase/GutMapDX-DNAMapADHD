@@ -57,7 +57,6 @@ const TitlePage = () => {
     const container = document.getElementById("report-container");
     if (!container) return;
 
-    // Signal to Puppeteer that the report DOM is ready for PDF capture.
     window.__REPORT_READY__ = false;
     requestAnimationFrame(() => {
       window.__REPORT_READY__ = true;
@@ -152,7 +151,7 @@ const TitlePage = () => {
             </h1>
 
             <div>
-              <h2 className="text-[22px] font-bold w-fit py-0 px-5 rounded-full" style={{ backgroundColor: primaryColor, color: "#ffffff" }}>
+              <h2 className={`text-[${Kittype?.length > 25 ? "18px" : "22px"}] font-bold w-fit py-0 px-5 rounded-full`} style={{ backgroundColor: primaryColor, color: "#ffffff" }}>
                 {Kittype ? Kittype : ""}
               </h2>
             </div>
