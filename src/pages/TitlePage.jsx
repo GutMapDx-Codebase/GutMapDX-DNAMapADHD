@@ -18,9 +18,8 @@ const KitIdIcon = () => (
 );
 
 const TitlePage = () => {
-  const { style, patientName, kitid, SampleDate, Kittype } =
+  const { style, patientName, kitid, SampleDate, dnaCategories } =
     useContext(GlobalDataContext);
-  console.log(kitid);
 
   const primaryColor = style?.primaryColor;
   const secondaryColor = style?.secondaryColor;
@@ -63,7 +62,7 @@ const TitlePage = () => {
     });
   }, [isPrint]);
 
-    const downloadpdf = async (Kittype) => {
+    const downloadpdf = async () => {
     try {
       setPercentage(10);
       percentageRef.current = 10;
@@ -151,8 +150,8 @@ const TitlePage = () => {
             </h1>
 
             <div>
-              <h2 className={`text-[${Kittype?.length > 25 ? "18px" : "22px"}] font-bold w-fit py-0 px-5 rounded-full`} style={{ backgroundColor: primaryColor, color: "#ffffff" }}>
-                {Kittype ? Kittype : ""}
+              <h2 className={`text-[${dnaCategories?.data?.reportName?.length > 25 ? "18px" : "22px"}] font-bold w-fit py-0 px-5 rounded-full`} style={{ backgroundColor: primaryColor, color: "#ffffff" }}>
+                {dnaCategories?.data?.reportName}
               </h2>
             </div>
 

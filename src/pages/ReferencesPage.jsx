@@ -107,14 +107,9 @@ const ReferencesPage = () => {
         setReferences(dnaCategories?.data?.references)
     }, [dnaCategories])
 
-    console.log(references)
-
-
-
     const headerBg = style?.headerBackground;
     const primaryColor = style?.primaryColor;
     const secondaryColor = style?.secondaryColor;
-
 
     return (
 
